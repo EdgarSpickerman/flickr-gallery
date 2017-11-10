@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 export default class SearchForm extends Component {
+		//calls the data function from the parent container
 		handleSubmit = e => {
 				e.preventDefault();
 				this.props.history.push(`/search/${this.query.value}`);

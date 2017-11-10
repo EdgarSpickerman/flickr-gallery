@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Photo extends Component {
+		//get the properties of photo to create the photo src url
 		id = this.props.data.id;
 		farm = this.props.data.farm;
 		server = this.props.data.server;
@@ -13,4 +14,3 @@ export default class Photo extends Component {
 				);
 		}
 }
-//https://farm${props.photo.farm}.staticflickr.com/${props.photo.server}/${props.photo.id}_${props.photo.secret}.jpg

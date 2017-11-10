@@ -8,20 +8,22 @@ import PhotoContainer from './PhotoContainer';
 
 export default class SearchLayout extends Component {
 		state = {
-				isLoading: true,
+				isLoading: false,
 				photos: []
 		}
 
+		//when the router mountes this searchLayout component it performs a getRequest
+		//if the route is a query route it performs the get request
 		componentDidMount() {
 				if (this.props.match.params.query) {
 						this.getPhotos(this.props.match.params.query);
-				} else {
-						this.setState({ photos: [], isLoading: false });
-				}
+				} 
 		}
 
+			//when the searchLayout Component recieves new props that are different performs a get request
+		//set the loading state and photos to showcase a loading screen
 		componentWillReceiveProps(nextProps) {
-				this.setState({ photos: [], isLoading: true })
+				this.setState({ photos: [], isLoading: true });
 				if (nextProps.match.path.toLowerCase() === '/search') {
 						this.setState({isLoading: false});
 				} else if (this.props.match.params.query !== nextProps.match.params.query) {
@@ -29,6 +31,7 @@ export default class SearchLayout extends Component {
 				}
 		}
 
+		//performs the get request updates state on a successful call
 		getPhotos = query => {
 				axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=16&format=json&nojsoncallback=1`)
 						.then(res => this.setState({ photos: res.data.photos.photo, isLoading: false }))

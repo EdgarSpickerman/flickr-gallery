@@ -7,21 +7,21 @@ import NoResults from './NoResults';
 
 export default class PhotoContainer extends Component {
 
-		notFound = <li className="not-found" ><h3>No Results Found</h3><p>You search did not return any results. Please try again.</p></li>;
-
 		render() {
 				return (
 						<div className="photo-container">
-
+								{/* if the application is in a loading state display the loading message*/}
 								{this.props.isLoading ? <h2>Loading...</h2> : ''}
 
+								{/* if more than zero photos then display category/search query as name */}
 								{this.props.photos.length ? <ResultTitle name={this.props.name} /> : ''}
 
 								<ul>
-
+										{/* iterates thru the photo array passed down to create photo components*/}
 										{this.props.photos ? this.props.photos.map(photo => <Photo key={photo.id} data={photo} />) : ''}
 
-										{this.props.isLoading || this.props.name === undefined ? '' : <NoResults />}
+										{/*No Results are displayed when there is zero photos,the app isnt loading, and the app isnt on the search page*/}
+										{this.props.photos.length || this.props.isLoading || this.props.name === undefined ? '' : <NoResults />}
 								</ul>
 						</div>
 				);
